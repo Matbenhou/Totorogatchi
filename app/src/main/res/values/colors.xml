@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="fitness">#67b9e9</color>
+    <color name="sleep">#2f2c49</color>
+    <color name="moodGood">#58a449</color>
+    <color name="moodMeh">#dcca2b</color>
+    <color name="moodBad">#b5192a</color>
+    <color name="food">#e48c2a</color>
+    <color name="statsBackground">#a6a6a6</color>
+    <color name="addButtonBaseColor">#573b2b</color>
+    <color name="addButtonIconColor">#a6a6a6</color>
+
+</resources>

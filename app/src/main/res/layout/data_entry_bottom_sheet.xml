@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/bottomSheetText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is a Bottom Sheet Dialog"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dismiss"
+        android:onClick="dismissBottomSheet" />
+</LinearLayout>
