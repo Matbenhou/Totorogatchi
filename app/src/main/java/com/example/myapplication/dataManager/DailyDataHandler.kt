@@ -36,11 +36,29 @@ class DailyDataHandler {
             }
         }
 
+        fun createStats(context: Context)
+        {
+
+        }
+
+        fun getLastWeekData(context: Context): List<Int>
+        {
+            val data = pullData(context)
+
+            data.forEach {
+
+            }
+
+
+            return listOf(0, 0, 0, 0)
+        }
+
         fun pullData(context: Context): LiveData<List<DailyData>> {
             val db = AppDatabase.getDatabase(context)
             val dailyDataDao = db.dailyDataDao()
 
             return dailyDataDao.getAllData()
         }
+
     }
 }

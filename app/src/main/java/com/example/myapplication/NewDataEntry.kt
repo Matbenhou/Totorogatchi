@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,11 +31,29 @@ class BottomSheetFragment(context: Context) : BottomSheetDialogFragment() {
         lateinit var exerciseInput : EditText
         lateinit var foodInput : EditText
 
-        DailyDataHandler.submitData(context = requireActivity(),getCurrentTime(), moodAmount = moodInput.text.toString().toInt(), sleepAmount = sleepInput.text.toString().toInt(), exerciseAmount = exerciseInput.text.toString().toInt(), foodCalories = foodInput.text.toString().toInt())
+        try {
+            DailyDataHandler.submitData(context = requireActivity(),getCurrentTime(), moodAmount = moodInput.text.toString().toInt(), sleepAmount = sleepInput.text.toString().toInt(), exerciseAmount = exerciseInput.text.toString().toInt(), foodCalories = foodInput.text.toString().toInt())
+            dismiss()
+        }
+        catch (e: Exception)
+        {
+            makePopup("Please fill all fields as instructed")
+        }
 
 
+    }
 
-        dismiss()
+    fun makePopup(text: String)
+    {
+        val popupMaker = AlertDialog.Builder(requireContext())
+        popupMaker.setMessage(text)
+        popupMaker.setNeutralButton("OK")
+        {
+                dialog, _ -> dialog.dismiss()
+        }
+
+        val dialog = popupMaker.create()
+        dialog.show()
     }
 
     fun getCurrentTime(): LocalTime

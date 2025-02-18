@@ -3,7 +3,6 @@ package com.example.myapplication
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
-import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,16 +10,16 @@ import androidx.core.view.WindowInsetsCompat
 import android.app.AlertDialog
 import android.graphics.drawable.AnimationDrawable
 import android.widget.ImageView
-import com.example.myapplication.dataManager.AppDatabase
-import com.example.myapplication.dataManager.DailyData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.datetime.*
+import android.widget.ProgressBar
 
 class MainActivity : AppCompatActivity() , View.OnClickListener {
 
     lateinit var addDataButton : Button
+
+    lateinit var foodBar : ProgressBar
+    lateinit var moodBar : ProgressBar
+    lateinit var sleepBar : ProgressBar
+    lateinit var exerciseBar : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +37,11 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
 
         addDataButton = findViewById(R.id.newEntry)
         addDataButton.setOnClickListener(this)
+
+        foodBar = findViewById(R.id.foodBar)
+        moodBar = findViewById(R.id.moodBar)
+        sleepBar = findViewById(R.id.sleepBar)
+        exerciseBar = findViewById(R.id.fitnessBar)
 
     }
 
@@ -78,21 +82,9 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         dialog.show()
     }
 
-    fun pullData(id : Int) {
-        val db = AppDatabase.getDatabase(this)
-        val dailyDataDao = db.dailyDataDao()
-        dailyDataDao.getDataByIdCallback(id) { dataEntry ->
-            val dataEntryText =
-                "ID: ${dataEntry?.id}, Date: ${dataEntry?.date}, Mood: ${dataEntry?.mood}, Sleep: ${dataEntry?.sleepHours}, Exercise: ${dataEntry?.exerciseMinutes}"
-            makePopup(dataEntryText)
-        }
-    }
-
-    fun getCurrentTime(): LocalTime
+    fun updateBars()
     {
-        val currentMoment: Instant = Clock.System.now()
-        val dateTime: LocalDateTime = currentMoment.toLocalDateTime(TimeZone.currentSystemDefault())
-        return dateTime.time
+
     }
 
 }
