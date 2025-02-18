@@ -20,14 +20,6 @@ import kotlinx.datetime.*
 
 class MainActivity : AppCompatActivity() , View.OnClickListener {
 
-    lateinit var moodValue : EditText
-    lateinit var sleepValue : EditText
-    lateinit var exerciseValue : EditText
-    //lateinit var submitDataButton : Button
-
-    //lateinit var pullDataButton : Button
-    lateinit var pullDataField : EditText
-
     lateinit var addDataButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,21 +36,8 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         val animation = imageView.drawable as AnimationDrawable
         animation.start()
 
-
-//        moodValue = findViewById(R.id.moodInput)
-//        sleepValue = findViewById(R.id.sleepInput)
-//        exerciseValue = findViewById(R.id.exerciseInput)
-//        submitDataButton = findViewById(R.id.submitDataButton)
-//
-//        pullDataButton = findViewById(R.id.pullDataButton)
-//        pullDataField = findViewById(R.id.dataPull)
-
         addDataButton = findViewById(R.id.newEntry)
         addDataButton.setOnClickListener(this)
-
-        //submitDataButton.setOnClickListener(this)
-        //pullDataButton.setOnClickListener(this)
-
 
     }
 
@@ -67,25 +46,10 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         when(v?.id) {
             R.id.newEntry ->
                 {
-                    val bottomSheetFragment = BottomSheetFragment()
+                    val bottomSheetFragment = BottomSheetFragment(this)
                     bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                 }
-//            R.id.submitDataButton ->
-//                {
-//                    try {
-//                        val moodAmount = moodValue.text.toString().toInt()
-//                        val sleepAmount = sleepValue.text.toString().toInt()
-//                        val exerciseAmount = exerciseValue.text.toString().toInt()
 //
-//                        moodValue.text.clear()
-//                        sleepValue.text.clear()
-//                        exerciseValue.text.clear()
-//
-//                        submitData(moodAmount, sleepAmount, exerciseAmount)
-//                    } catch (e: Exception) {
-//                        makePopup("Please fill all fields with numbers")
-//                    }
-//                }
 //            R.id.pullDataButton ->
 //                {
 //                    try {
@@ -112,18 +76,6 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
 
         val dialog = popupMaker.create()
         dialog.show()
-    }
-
-    fun submitData(moodAmount : Int ,  sleepAmount : Int,  exerciseAmount : Int)
-    {
-        val db = AppDatabase.getDatabase(this)
-        val dailyDataDao = db.dailyDataDao()
-
-        val dateText = getCurrentTime().toString()
-
-        CoroutineScope(Dispatchers.IO).launch {
-            dailyDataDao.insert(DailyData(date = dateText , mood = moodAmount, sleepHours = sleepAmount.toFloat(), exerciseMinutes = exerciseAmount) )
-        }
     }
 
     fun pullData(id : Int) {

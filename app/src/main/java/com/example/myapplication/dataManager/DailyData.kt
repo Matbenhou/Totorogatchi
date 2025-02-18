@@ -11,5 +11,7 @@ data class DailyData(
     @ColumnInfo val date: String,
     @ColumnInfo val mood: Int,  // Scale from 1-5
     @ColumnInfo val sleepHours: Float,
-    @ColumnInfo val exerciseMinutes: Int
+    @ColumnInfo val exerciseMinutes: Int,
+    @ColumnInfo val foodCalories: Int
+
 )

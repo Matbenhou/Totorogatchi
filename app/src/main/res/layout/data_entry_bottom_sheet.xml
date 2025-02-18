@@ -4,18 +4,80 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+
     <TextView
         android:id="@+id/bottomSheetText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is a Bottom Sheet Dialog"
+        android:text="Input Data about your day"
         android:textSize="18sp"
         android:padding="8dp"
         android:gravity="center" />
-
-    <Button
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dismiss"
-        android:onClick="dismissBottomSheet" />
+        android:layout_marginVertical="5sp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/moodInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How was your mood today? (1-5)">
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5sp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/sleepInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How many hours did you sleep today?">
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5sp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/exerciseInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How many minutes of exercise today?">
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5sp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/foodInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How many calories did you eat today?">
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5sp"
+        android:backgroundTint="@color/addButtonBaseColor"
+        android:text="Submit"
+        android:onClick="dismissBottomSheet">
+
+    </com.google.android.material.button.MaterialButton>
+
 </LinearLayout>
