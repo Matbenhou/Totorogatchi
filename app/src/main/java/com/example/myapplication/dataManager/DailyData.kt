@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "daily_data")
 data class DailyData(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo val date: String,
+    @ColumnInfo val date: Long,
     @ColumnInfo val mood: Int,  // Scale from 1-5
     @ColumnInfo val sleepHours: Float,
     @ColumnInfo val exerciseMinutes: Int,

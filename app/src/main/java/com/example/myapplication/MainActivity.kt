@@ -11,6 +11,7 @@ import android.app.AlertDialog
 import android.graphics.drawable.AnimationDrawable
 import android.widget.ImageView
 import android.widget.ProgressBar
+import com.example.myapplication.dataManager.DailyDataHandler
 
 class MainActivity : AppCompatActivity() , View.OnClickListener {
 
@@ -43,6 +44,8 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         sleepBar = findViewById(R.id.sleepBar)
         exerciseBar = findViewById(R.id.fitnessBar)
 
+        updateBars()
+
     }
 
     override fun onClick(v: View?) {
@@ -52,6 +55,7 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
                 {
                     val bottomSheetFragment = BottomSheetFragment(this)
                     bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                    updateBars()
                 }
 //
 //            R.id.pullDataButton ->
@@ -71,7 +75,6 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
     fun makePopup(text: String)
     {
         val popupMaker = AlertDialog.Builder(this)
-        System.out.println(text)
         popupMaker.setMessage(text)
         popupMaker.setNeutralButton("OK")
         {
@@ -84,7 +87,13 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
 
     fun updateBars()
     {
+        val handler = DailyDataHandler()
+        val data = handler.getWeeklyStats(this)
 
+        moodBar.progress = data[0].toInt()
+        sleepBar.progress = data[1].toInt()
+        exerciseBar.progress = data[2].toInt()
+        foodBar.progress = data[3].toInt()
     }
 
 }

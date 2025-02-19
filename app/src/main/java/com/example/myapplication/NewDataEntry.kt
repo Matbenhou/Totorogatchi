@@ -32,7 +32,8 @@ class BottomSheetFragment(context: Context) : BottomSheetDialogFragment() {
         lateinit var foodInput : EditText
 
         try {
-            DailyDataHandler.submitData(context = requireActivity(),getCurrentTime(), moodAmount = moodInput.text.toString().toInt(), sleepAmount = sleepInput.text.toString().toInt(), exerciseAmount = exerciseInput.text.toString().toInt(), foodCalories = foodInput.text.toString().toInt())
+            val handler = DailyDataHandler()
+            handler.submitData(context = requireActivity(), moodAmount = moodInput.text.toString().toInt(), sleepAmount = sleepInput.text.toString().toInt(), exerciseAmount = exerciseInput.text.toString().toInt(), foodCalories = foodInput.text.toString().toInt())
             dismiss()
         }
         catch (e: Exception)

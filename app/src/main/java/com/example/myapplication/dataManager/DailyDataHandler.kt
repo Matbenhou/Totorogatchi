@@ -5,14 +5,12 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalTime
 
 class DailyDataHandler {
-
-    companion object {
         fun submitData(
             context: Context,
-            date: LocalTime,
             moodAmount: Int,
             sleepAmount: Int,
             exerciseAmount: Int,
@@ -21,12 +19,10 @@ class DailyDataHandler {
             val db = AppDatabase.getDatabase(context)
             val dailyDataDao = db.dailyDataDao()
 
-            val dateText = date.toString()
-
             CoroutineScope(Dispatchers.IO).launch {
                 dailyDataDao.insert(
                     DailyData(
-                        date = dateText,
+                        date = Clock.System.now().epochSeconds,
                         mood = moodAmount,
                         sleepHours = sleepAmount.toFloat(),
                         exerciseMinutes = exerciseAmount,
@@ -36,22 +32,34 @@ class DailyDataHandler {
             }
         }
 
-        fun createStats(context: Context)
+        fun getWeeklyStats(context: Context) : List<Double>
         {
+            val db = AppDatabase.getDatabase(context)
+            val dailyDataDao = db.dailyDataDao()
+            val data = dailyDataDao.getLastWeekDataForUse()
 
-        }
+            var moodSum = 0.0
+            var sleepSum = 0.0
+            var exerciseSum = 0.0
+            var foodSum = 0.0
 
-        fun getLastWeekData(context: Context): List<Int>
-        {
-            val data = pullData(context)
-
-            data.forEach {
-
+            for (i in data)
+            {
+                moodSum += i.mood
+                sleepSum += i.sleepHours
+                exerciseSum += i.exerciseMinutes
+                foodSum += i.foodCalories
             }
 
+            moodSum /= data.size
+            sleepSum /= data.size
+            exerciseSum /= data.size
+            foodSum /= data.size
 
-            return listOf(0, 0, 0, 0)
+            return listOf(moodSum, sleepSum, exerciseSum, foodSum)
+
         }
+
 
         fun pullData(context: Context): LiveData<List<DailyData>> {
             val db = AppDatabase.getDatabase(context)
@@ -61,4 +69,3 @@ class DailyDataHandler {
         }
 
     }
-}
